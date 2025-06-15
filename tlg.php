@@ -60,7 +60,7 @@ class Telegram {
             }
           $params = ['token'=>self::$bot_token,'url'=>$url];
           $ch = curl_init($api . '?' . http_build_query($params));
-          curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER =>true,CURLOPT_SSL_VERIFYPEER =>false,]);
+          curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER =>true,CURLOPT_SSL_VERIFYPEER =>false]);
           $response = curl_exec($ch);
           curl_close($ch);
         return json_decode($response, true);
@@ -68,13 +68,22 @@ class Telegram {
 
     public static function message() {
         return self::getValue([
-            'message', 'callback_query', 'inline_query', 'edited_message', 
-            'channel_post', 'edited_channel_post', 'chat_join_request', 'my_chat_member'
+            'message', 
+            'callback_query',
+            'inline_query', 'edited_message', 
+            'channel_post', 
+           'edited_channel_post',
+          'chat_join_request',
+        'my_chat_member'
         ]);
     }
     public static function media() {
         return self::getValue([
-            'document', 'text', 'photo', 'video', 'game', 'voice', 'audio', 'sticker', 
+            'document',
+            'text', 
+            'photo', 
+            'video', 
+            'game', 'voice', 'audio', 'sticker', 
             'location', 'video_note', 'contact', 'reply_to_message', 'forward_from'
         ], 'message');
     }
